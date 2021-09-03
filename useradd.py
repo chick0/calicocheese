@@ -10,7 +10,7 @@ from app.database import get_url
 from app.models import Member
 
 
-User = namedtuple("User", "id name email blog avatar_url html_url two_factor_authentication is_admin")
+User = namedtuple("User", "id name email blog avatar_url html_url two_factor_authentication is_admin bio")
 Database = namedtuple("Database", "host port user password database")
 
 
@@ -54,6 +54,7 @@ def main():
         html_url=result.get("html_url"),
         two_factor_authentication=False,
         is_admin=is_admin,
+        bio=result.get("bio") if result.get("bio") is not None else ""
     )
 
     engine = create_engine(get_url())
@@ -79,6 +80,7 @@ def main():
     member.html_url = user.html_url
     member.two_factor_authentication = user.two_factor_authentication
     member.is_admin = user.is_admin
+    member.bio = user.bio
 
     session.add(member)
     session.commit()
