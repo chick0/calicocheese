@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <section class="container">
+        <div class="py-5">
+            <h1 class="display-5 fw-bold">Calico Cheese</h1>
+            <p class="col-md-6 fs-4">칼리코 치즈는 개인 프로젝트를 진행하고, 그 프로젝트를 서로 도와주는 팀입니다.</p>
+        </div>
+
+        <div>
+        {% for member in members %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <img src="{{ member.avatar_url }}" class="rounded float-start" style="max-width:10%;margin-right:30px;">
+                    <h5 class="card-title">{{ member.name }}</h5>
+                    <p class="card-text">{{ member.bio }}</p>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-dark" href="{{ member.html_url }}">Github</a>
+                {% if member.blog|length > 0 %}
+                    <a class="btn btn-primary" href="{{ member.blog }}">Website</a>
+                {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </section>
+{% endblock %}
