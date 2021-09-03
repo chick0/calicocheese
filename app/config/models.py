@@ -9,7 +9,7 @@ Database = namedtuple(
 
 Github = namedtuple(
     "Github",
-    "client_id scope client_secret"
+    "client_id client_secret"
 )
 
 
