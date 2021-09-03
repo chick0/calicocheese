@@ -11,4 +11,5 @@ def get_url() -> str:
     if "#" in [database.user, database.password, database.host, database.port, database.database]:
         return "#"
 
-    return f"mysql://{database.user}:{database.password}@{database.host}:{database.port}/{database.database}"
+    return f"mysql://{database.user}:{database.password}@{database.host}:{database.port}/{database.database}" \
+           f"?charset=utf8"
