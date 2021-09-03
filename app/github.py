@@ -40,7 +40,8 @@ def generate_access_token(code: str) -> AccessToken:
             "code": code
         }).encode(),
         headers={
-            "Accept": "application/vnd.github.v3+json"
+            "Accept": "application/vnd.github.v3+json",
+            "User-Agent": "CalicoCheese.xyz (Github OAuth)"
         },
         method="POST"
     )
@@ -63,7 +64,8 @@ def get_user(access_token: AccessToken) -> User:
         url="https://api.github.com/user",
         headers={
             "Accept": "application/vnd.github.v3+json",
-            "Authorization": f"{access_token.type} {access_token.token}"
+            "Authorization": f"{access_token.type} {access_token.token}",
+            "User-Agent": "CalicoCheese.xyz (Github OAuth)"
         }
     )
 
