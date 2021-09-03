@@ -5,10 +5,16 @@ from app import db
 
 
 class Member(db.Model):
-    id = db.Column(
+    index = db.Column(
         db.Integer,
         unique=True,
         primary_key=True,
+        nullable=False
+    )
+
+    id = db.Column(
+        db.Integer,
+        unique=True,
         nullable=False
     )
 
