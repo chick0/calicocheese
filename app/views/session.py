@@ -63,6 +63,9 @@ def callback():
     if member.two_factor_authentication != user.two_factor_authentication:
         member.two_factor_authentication = user.two_factor_authentication
 
+    if member.bio != user.bio:
+        member.bio = user.bio
+
     db.session.commit()
 
     return redirect(url_for("manage.show_all"))

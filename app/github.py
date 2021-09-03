@@ -12,7 +12,7 @@ SCOPE = "read:user,user:email"
 
 AccessToken = namedtuple("AccessToken", "token type")
 
-User = namedtuple("User", "id name email blog avatar_url html_url two_factor_authentication")
+User = namedtuple("User", "id name email blog avatar_url html_url two_factor_authentication bio")
 
 
 def get_github() -> Github:
@@ -84,4 +84,5 @@ def get_user(access_token: AccessToken) -> User:
         avatar_url=result.get("avatar_url"),
         html_url=result.get("html_url"),
         two_factor_authentication=result.get("two_factor_authentication"),
+        bio=result.get("bio")
     )
