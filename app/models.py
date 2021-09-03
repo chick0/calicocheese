@@ -53,6 +53,11 @@ class Member(db.Model):
         nullable=False
     )
 
+    bio = db.Column(
+        db.Text,
+        nullable=False
+    )
+
     def __repr__(self):
         return f"<Member id={self.id}, name={self.name!r}>"
 
