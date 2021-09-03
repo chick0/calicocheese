@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Calico Cheese</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">Calico Cheese</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#CalicoCheeseNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="CalicoCheeseNavbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('upload.form') }}">업로드</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        {% block content %}{% endblock %}
+
+        <!-- Script -->
+        <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+
+<!-- <script src="{{ url_for('static', filename='ckeditor.min.js') }}"></script> -->
+    </body>
+</html>
