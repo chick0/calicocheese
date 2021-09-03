@@ -17,3 +17,8 @@ def form():
 @bp.post("/form")
 def form_post():
     return "upload.form_post"
+
+
+@bp.get("/files")
+def files():
+    return "upload.files"
