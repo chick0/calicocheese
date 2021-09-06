@@ -3,6 +3,7 @@ __all__ = [
     "index",
     "manage",
     "member",
+    "project",
     "upload",
 ]
 
