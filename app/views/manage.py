@@ -19,14 +19,6 @@ bp = Blueprint(
 )
 
 
-@bp.get("")
-def show_all():
-    if not check_login():
-        return redirect(url_for("member.session.login"))
-
-    return "manage.show_all"
-
-
 @bp.get("/write")
 def write():
     if not check_login():
