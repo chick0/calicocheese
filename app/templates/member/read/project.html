@@ -5,7 +5,13 @@
 {% block content %}
     <section class="container">
         <div class="py-3">
-            <h1 class="display-3">{{ title }}</h1>
+            <h1 class="display-4">{{ title }}</h1>
+        {% if is_owner %}
+            <div>
+                <a class="btn btn-warning" href="{{ url_for('manage.edit', project_id=project_id) }}">수정</a>
+                <a class="btn btn-danger" href="{{ url_for('manage.delete', project_id=project_id) }}">삭제</a>
+            </div>
+        {% endif %}
         </div>
 
         {{ html|safe }}
