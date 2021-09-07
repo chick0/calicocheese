@@ -11,7 +11,7 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <img src="{{ member.avatar_url }}" class="rounded float-start" style="max-width:10%;margin-right:30px;">
-                    <h5 class="card-title">{{ member.name }}</h5>
+                    <h5 class="card-title"><a href="{{ url_for('member.show', name=member.name) }}">{{ member.name }}</a></h5>
                     <p class="card-text">{{ member.bio }}</p>
                 </div>
                 <div class="card-footer">

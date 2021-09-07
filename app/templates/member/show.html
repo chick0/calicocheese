@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <section class="container">
+        <div class="py-3">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <img src="{{ member.avatar_url }}" class="rounded float-start" style="max-width:10%;margin-right:30px;">
+                    <h5 class="card-title">{{ member.name }}</h5>
+                    <p class="card-text">{{ member.bio }}</p>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-dark" href="{{ member.html_url }}">Github</a>
+                {% if member.blog|length > 0 %}
+                    <a class="btn btn-primary" href="{{ member.blog }}">Website</a>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="py-3 pb-5">
+            <div class="list-group list-group-flush">
+            {% for project in projects.items %}
+                <a class="list-group-item list-group-item-action" href="{{ url_for('project.warp', project_id=project.id) }}">
+                    {% if project.public is false %}
+                        <span class="badge bg-secondary">비공개</span>
+                    {% endif %} {{ project.title }}
+                </a>
+            {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
