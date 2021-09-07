@@ -8,7 +8,7 @@ from .session import bp as session_bp
 bp = Blueprint(
     name="member",
     import_name="member",
-    url_prefix="/member"
+    url_prefix="/"
 )
 bp.register_blueprint(read_bp)
 bp.register_blueprint(session_bp)

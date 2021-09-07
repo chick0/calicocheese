@@ -1,8 +1,12 @@
 
 from flask import Blueprint
+from flask import abort
 from flask import request
+from flask import redirect
+from flask import url_for
 from flask import render_template
 
+from app.models import Member
 from app.models import Project
 
 
@@ -32,3 +36,21 @@ def show_all():
         projects=projects
     )
 
+
+@bp.get("/warp/<int:project_id>")
+def warp(project_id: int):
+    project = Project.query.filter_by(
+        id=project_id
+    ).first()
+
+    if project is None:
+        return abort(404)
+
+    member = Member.query.filter_by(
+        id=project.owner
+    ).first()
+
+    if member is None:
+        return abort(404)
+
+    return redirect(url_for("member.read.project", name=member.name, project_id=project_id))
