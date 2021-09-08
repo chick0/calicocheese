@@ -90,6 +90,33 @@ class File(db.Model):
         return f"<File id={self.id}, name={self.name!r}>"
 
 
+class CheckSum(db.Model):
+    id = db.Column(
+        db.Integer,
+        unique=True,
+        primary_key=True,
+        nullable=False
+    )
+
+    md5 = db.Column(
+        db.String(32),
+        nullable=False
+    )
+
+    sha1 = db.Column(
+        db.String(40),
+        nullable=False
+    )
+
+    sha256 = db.Column(
+        db.String(64),
+        nullable=False
+    )
+
+    def __repr__(self):
+        return f"<CheckSum id={self.id}>"
+
+
 class Project(db.Model):
     id = db.Column(
         db.Integer,
