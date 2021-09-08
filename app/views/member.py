@@ -7,7 +7,6 @@ from flask import render_template
 from app.models import Member
 from app.models import Project
 from .read import bp as read_bp
-from .session import bp as session_bp
 
 
 bp = Blueprint(
@@ -16,7 +15,6 @@ bp = Blueprint(
     url_prefix="/"
 )
 bp.register_blueprint(read_bp)
-bp.register_blueprint(session_bp)
 
 
 @bp.get("/<string:name>")

@@ -10,6 +10,7 @@ from app import db
 from app.models import Project
 from app.utils import check_login
 from app.utils import get_user_from_session
+from .session import bp as session_bp
 
 
 bp = Blueprint(
@@ -17,12 +18,13 @@ bp = Blueprint(
     import_name="manage",
     url_prefix="/manage"
 )
+bp.register_blueprint(session_bp)
 
 
 @bp.get("/write")
 def write():
     if not check_login():
-        return redirect(url_for("member.session.login"))
+        return redirect(url_for("manage.session.login"))
 
     return render_template(
         "manage/write.html"
@@ -32,7 +34,7 @@ def write():
 @bp.post("/write")
 def write_post():
     if not check_login():
-        return redirect(url_for("member.session.login"))
+        return redirect(url_for("manage.session.login"))
 
     user = get_user_from_session()
 
@@ -51,7 +53,7 @@ def write_post():
 @bp.get("/edit/<int:project_id>")
 def edit(project_id: int):
     if not check_login():
-        return redirect(url_for("member.session.login"))
+        return redirect(url_for("manage.session.login"))
 
     user = get_user_from_session()
 
@@ -73,7 +75,7 @@ def edit(project_id: int):
 @bp.post("/edit/<int:project_id>")
 def edit_post(project_id: int):
     if not check_login():
-        return redirect(url_for("member.session.login"))
+        return redirect(url_for("manage.session.login"))
 
     user = get_user_from_session()
 
@@ -97,7 +99,7 @@ def edit_post(project_id: int):
 @bp.get("/delete/<int:project_id>")
 def delete(project_id: int):
     if not check_login():
-        return redirect(url_for("member.session.login"))
+        return redirect(url_for("manage.session.login"))
 
     user = get_user_from_session()
 

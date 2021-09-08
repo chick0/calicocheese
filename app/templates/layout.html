@@ -28,11 +28,11 @@
                             <a class="nav-link" href="{{ url_for('upload.files') }}">파일 관리</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('member.session.logout') }}">로그아웃</a>
+                            <a class="nav-link" href="{{ url_for('manage.session.logout') }}">로그아웃</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('member.session.login') }}">로그인</a>
+                            <a class="nav-link" href="{{ url_for('manage.session.login') }}">로그인</a>
                         </li>
                     {% endif %}
                     </ul>

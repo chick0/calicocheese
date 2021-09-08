@@ -16,7 +16,7 @@ from app.github import get_user
 bp = Blueprint(
     name="session",
     import_name="session",
-    url_prefix="/"
+    url_prefix="/session"
 )
 
 
@@ -39,7 +39,7 @@ def callback():
 
     access_token = generate_access_token(code=code)
     if access_token.token == "":
-        return redirect(url_for("member.session.login"))
+        return redirect(url_for("manage.session.login"))
 
     user = get_user(access_token)
     member = Member.query.filter_by(
@@ -68,4 +68,4 @@ def callback():
 
     db.session.commit()
 
-    return redirect(url_for("manage.show_all"))
+    return redirect(url_for("member.show", name=member.name))
