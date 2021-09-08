@@ -32,6 +32,7 @@ def create_app():
     test_config()
 
     app = Flask(__name__)
+    app.config['MAX_CONTENT_LENGTH'] = 30 * 1000 * 1000
 
     from .secret_key import SECRET_KEY
     app.config['SECRET_KEY'] = SECRET_KEY

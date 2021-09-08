@@ -1,5 +1,14 @@
 
 from flask import Blueprint
+from flask import request
+from flask import redirect
+from flask import url_for
+from flask import render_template
+
+from app import db
+from app.models import File
+from app.utils import check_login
+from app.utils import get_user_from_session
 
 
 bp = Blueprint(
@@ -9,16 +18,19 @@ bp = Blueprint(
 )
 
 
-@bp.get("/form")
+@bp.get("")
 def form():
-    return "upload.form"
+    if not check_login():
+        return redirect(url_for("manage.session.login"))
+
+    return render_template(
+        "upload/form.html"
+    )
 
 
-@bp.post("/form")
+@bp.post("")
 def form_post():
+    if not check_login():
+        return redirect(url_for("manage.session.login"))
+
     return "upload.form_post"
-
-
-@bp.get("/files")
-def files():
-    return "upload.files"

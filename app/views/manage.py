@@ -11,6 +11,7 @@ from app.models import Project
 from app.utils import check_login
 from app.utils import get_user_from_session
 from .session import bp as session_bp
+from .files import bp as files_bp
 
 
 bp = Blueprint(
@@ -19,6 +20,7 @@ bp = Blueprint(
     url_prefix="/manage"
 )
 bp.register_blueprint(session_bp)
+bp.register_blueprint(files_bp)
 
 
 @bp.get("/write")
