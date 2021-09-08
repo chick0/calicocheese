@@ -8,7 +8,7 @@
 
         <div class="py-3">
             <form method="post" enctype="multipart/form-data">
-                <input class="form-control form-control-lg" id="upload" name="upload" type="file">
+                <input class="form-control form-control-lg" id="file" name="file" type="file">
 
                 <div class="pt-3 d-grid gap-2">
                     <button class="btn btn-primary btn-lg" type="submit">업로드</button>
@@ -16,4 +16,18 @@
             </form>
         </div>
     </section>
+{% endblock %}
+{% block script %}
+    <script>
+        const fileInput = document.getElementById("file");
+        fileInput.onchange = function(){
+            if (fileInput.files.length == 1) {
+                if(fileInput.files[0].size >= {{ max_size }}) {
+                    window.alert("업로드 하려는 파일의 크기가 너무 큽니다."); fileInput.value="";
+                } else {
+                    window.alert("파일 선택 완료!");
+                }
+            }
+        }
+    </script>
 {% endblock %}
