@@ -4,6 +4,7 @@ __all__ = [
     "manage",
     "member",
     "project",
+    "robots",
     "upload",
 ]
 
