@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
+        <div class="py-3">
+            <div class="list-group list-group-flush">
+            {% for file in files %}
+                <a class="list-group-item list-group-item-action" href="{{ url_for('manage.files.detail', file_id=file.id) }}">
+                    {{ file.name }}
+                </a>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -49,4 +49,8 @@ def create_app():
     for view in views.__all__:
         app.register_blueprint(getattr(getattr(views, view), "bp"))
 
+    from . import template_filter
+    for filter_name in [x for x in dir(template_filter) if not x.startswith("__")]:
+        app.add_template_filter(getattr(template_filter, filter_name), name=filter_name)
+
     return app

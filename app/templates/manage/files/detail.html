@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
+        <div class="py-3">
+            <h1 class="display-4">{{ file.name }}</h1>
+            <p class="lead"><b>업로드 날짜</b> {{ file.date }}</p>
+
+            <div>
+                <a class="btn btn-danger" href="{{ url_for('manage.files.delete', file_id=file.id) }}">파일 삭제</a>
+                <button class="btn btn-primary copy" data-clipboard-text="{{ request.scheme }}://{{ request.host }}{{ url_for('file.get', file_id=file.id, file_name=file.name) }}">링크 복사</button>
+            </div>
+
+        {% if file.name|is_image %}
+            <div class="py-3" style="max-width:120px">
+                <img class="img-fluid" src="{{ url_for('file.get', file_id=file.id, file_name=file.name) }}">
+            </div>
+        {% endif %}
+
+        {% if file.name|is_video %}
+            <div class="py-3" style="max-width:120px">
+                <video src="{{ url_for('file.get', file_id=file.id, file_name=file.name) }}" controls></video>
+            </div>
+        {% endif %}
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Type</th>
+                        <th scope="col">Hash</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="copy" data-clipboard-target="#md5">
+                        <th scope="row">MD5</th>
+                        <td id="md5">{{ checksum.md5 }}</td>
+                    </tr>
+                    <tr class="copy" data-clipboard-target="#sha1">
+                        <th scope="row">SHA1</th>
+                        <td id="sha1">{{ checksum.sha1 }}</td>
+                    </tr>
+                    <tr class="copy" data-clipboard-target="#sha256">
+                        <th scope="row">SHA256</th>
+                        <td id="sha256">{{ checksum.sha256 }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="py-3">
+            <h3 class="display-6">파일 수정</h3>
+            <div class="alert alert-danger">업로드 용량 제한은 <b>30MB</b>입니다.</div>
+            <div class="alert alert-warning">파일 이름은 변경되지 않습니다.</div>
+            <form method="post" enctype="multipart/form-data" action="{{ url_for('manage.files.edit_post', file_id=file.id) }}">
+                <input class="form-control form-control-lg" id="file" name="file" type="file" required="required">
+
+                <div class="pt-3 d-grid gap-2">
+                    <button class="btn btn-primary btn-lg" type="submit">업로드</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script src="{{ url_for('static', filename='clipboard.min.js') }}"></script>
+    <script>
+        const clipboard = new ClipboardJS(".copy");
+        clipboard.on("success",function(e){e.clearSelection(),window.alert("복사되었습니다.");});
+
+        const fileInput = document.getElementById("file");
+        fileInput.onchange = function(){
+            if (fileInput.files.length == 1) {
+                if(fileInput.files[0].size >= {{ max_size }}) {
+                    window.alert("업로드 하려는 파일의 크기가 너무 큽니다."); fileInput.value="";
+                } else {
+                    window.alert("파일 선택 완료!");
+                }
+            }
+        }
+    </script>
+{% endblock %}
