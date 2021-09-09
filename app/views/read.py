@@ -36,8 +36,10 @@ def project(name: str, project_id: int):
 
     try:
         user = get_user_from_session()
+        is_owner = pj.owner == user.id
     except UserNotLogin:
         user = None
+        is_owner = False
 
     if not pj.public:
         if user is None:
@@ -48,5 +50,5 @@ def project(name: str, project_id: int):
         title=pj.title,
         html=pj.html,
         project_id=pj.id,
-        is_owner=pj.owner == user.id
+        is_owner=is_owner
     )
