@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='androidstudio.min.css') }}">
 {% endblock %}
 {% block content %}
-    <section class="container">
+    <div class="container">
         <div class="py-3">
             <h1 class="display-4">{{ title }}</h1>
         {% if is_owner %}
@@ -15,7 +15,7 @@
         </div>
 
         {{ html|safe }}
-    </section>
+    </div>
 {% endblock %}
 {% block script %}
     <script src="{{ url_for('static', filename='highlight.min.js') }}"></script>
