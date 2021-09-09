@@ -29,6 +29,6 @@ def robots():
 @bp.route("/favicon.ico")
 def favicon():
     return send_file(
-        "static/img/favicon.ico",
+        "static/favicon.ico",
         mimetype="image/x-icon"
     )
