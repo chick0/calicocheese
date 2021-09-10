@@ -54,18 +54,19 @@ def callback():
         "user": dumps(user),
     }
 
-    if member.email != user.email:
-        member.email = user.email
+    if member.auto_update:
+        if member.email != user.email:
+            member.email = user.email
 
-    if member.blog != user.blog:
-        member.blog = user.blog
+        if member.blog != user.blog:
+            member.blog = user.blog
 
-    if member.two_factor_authentication != user.two_factor_authentication:
-        member.two_factor_authentication = user.two_factor_authentication
+        if member.two_factor_authentication != user.two_factor_authentication:
+            member.two_factor_authentication = user.two_factor_authentication
 
-    if member.bio != user.bio:
-        member.bio = user.bio
+        if member.bio != user.bio:
+            member.bio = user.bio
 
-    db.session.commit()
+        db.session.commit()
 
-    return redirect(url_for("member.show", name=member.name))
+    return redirect(url_for("manage.me"))

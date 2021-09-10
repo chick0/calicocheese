@@ -23,6 +23,14 @@ bp.register_blueprint(session_bp)
 bp.register_blueprint(files_bp)
 
 
+@bp.get("/me")
+def me():
+    if not check_login():
+        return redirect(url_for("manage.session.login"))
+
+    return "manage.me"
+
+
 @bp.get("/write")
 def write():
     if not check_login():

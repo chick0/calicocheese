@@ -58,6 +58,12 @@ class Member(db.Model):
         nullable=False
     )
 
+    auto_update = db.Column(
+        db.Boolean,
+        nullable=False,
+        default=True
+    )
+
     def __repr__(self):
         return f"<Member id={self.id}, name={self.name!r}>"
 
