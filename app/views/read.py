@@ -37,9 +37,16 @@ def project(name: str, project_id: int):
     try:
         user = get_user_from_session()
         is_owner = pj.owner == user.id
+
+        member_from_db = Member.query.filter_by(
+            id=user.id
+        ).first()
+
+        is_admin = member_from_db.is_admin
     except UserNotLogin:
         user = None
         is_owner = False
+        is_admin = False
 
     if not pj.public:
         if user is None:
@@ -50,5 +57,6 @@ def project(name: str, project_id: int):
         title=pj.title,
         html=pj.html,
         project_id=pj.id,
-        is_owner=is_owner
+        is_owner=is_owner,
+        is_admin=is_admin
     )

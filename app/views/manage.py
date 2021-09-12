@@ -77,15 +77,23 @@ def edit(project_id: int):
     if not check_login():
         return redirect(url_for("manage.session.login"))
 
-    user = get_user_from_session()
-
     project = Project.query.filter_by(
-        id=project_id,
-        owner=user.id
+        id=project_id
     ).first()
 
     if project is None:
         return abort(404)
+
+    user = get_user_from_session()
+
+    member = Member.query.filter_by(
+        id=user.id
+    ).first()
+
+    if member.id == project.owner or member.is_admin:
+        pass
+    else:
+        return abort(403)
 
     return render_template(
         "manage/edit.html",
@@ -99,15 +107,23 @@ def edit_post(project_id: int):
     if not check_login():
         return redirect(url_for("manage.session.login"))
 
-    user = get_user_from_session()
-
     project = Project.query.filter_by(
-        id=project_id,
-        owner=user.id
+        id=project_id
     ).first()
 
     if project is None:
         return abort(404)
+
+    user = get_user_from_session()
+
+    member = Member.query.filter_by(
+        id=user.id
+    ).first()
+
+    if member.id == project.owner or member.is_admin:
+        pass
+    else:
+        return abort(403)
 
     project.title = request.form.get("title", project.title)
     project.html = request.form.get("editor", project.html)
@@ -115,7 +131,7 @@ def edit_post(project_id: int):
 
     db.session.commit()
 
-    return redirect(url_for("member.read.project", name=user.name, project_id=project_id))
+    return redirect(url_for("project.warp", project_id=project_id))
 
 
 @bp.get("/delete/<int:project_id>")
