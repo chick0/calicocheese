@@ -154,3 +154,35 @@ class Project(db.Model):
 
     def __repr__(self):
         return f"<Project id={self.id}, owner={self.owner}>"
+
+
+class Link(db.Model):
+    id = db.Column(
+        db.Integer,
+        unique=True,
+        primary_key=True,
+        nullable=False
+    )
+
+    project_id = db.Column(
+        db.Integer,
+        nullable=False
+    )
+
+    color = db.Column(
+        db.String(60),
+        nullable=False
+    )
+
+    text = db.Column(
+        db.String(100),
+        nullable=False
+    )
+
+    url = db.Column(
+        db.String(256),
+        nullable=False
+    )
+
+    def __repr__(self):
+        return f"<Link id={self.id}, project_id={self.project_id}>"
