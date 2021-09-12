@@ -10,6 +10,7 @@
             <div class="mb-3">
                 <a class="btn btn-warning" href="{{ url_for('manage.edit', project_id=project_id) }}">수정</a>
                 <a class="btn btn-danger" href="{{ url_for('manage.delete', project_id=project_id) }}">삭제</a>
+                <a class="btn btn-primary" href="{{ url_for('manage.link.view', project_id=project_id) }}">버튼 관리</a>
             </div>
         {% endif %}
             <div id="link-button"></div>
