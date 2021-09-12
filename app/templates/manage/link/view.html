@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
+        <div class="py-3">
+            <p class="lead">대상 프로젝트 : <a href="{{ url_for('project.warp', project_id=project_id) }}" target="_blank">{{ project_title }}</a></p>
+
+            <div class="alert alert-warning" role="alert">버튼 색상은 변경 할 수 없습니다.</div>
+            <form method="post" action="{{ url_for('manage.link.create_post', project_id=project_id) }}">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="text" name="text" placeholder="버튼 내용" maxlength="100" required>
+                    <label for="text">버튼 내용</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="url" class="form-control" id="url" name="url" placeholder="버튼 링크" maxlength="256" required>
+                    <label for="url">URL</label>
+                </div>
+
+                <div class="mb-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="color" id="colorDanger" value="btn-danger">
+                        <label class="form-check-label btn-danger" for="colorDanger">이 색깔로 버튼 색상을 지정합니다.</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="color" id="colorWarning" value="btn-warning">
+                        <label class="form-check-label btn-warning" for="colorWarning">이 색깔로 버튼 색상을 지정합니다.</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="color" id="colorSuccess" value="btn-success">
+                        <label class="form-check-label btn-success" for="colorSuccess">이 색깔로 버튼 색상을 지정합니다.</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="color" id="colorPrimary" value="btn-primary" checked>
+                        <label class="form-check-label btn-primary" for="colorPrimary">이 색깔로 버튼 색상을 지정합니다.</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="color" id="btn-dark" value="btn-dark">
+                        <label class="form-check-label btn-dark" for="btn-dark">이 색깔로 버튼 색상을 지정합니다.</label>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" type="submit">버튼 등록</button>
+            </form>
+
+            <hr class="my-3">
+
+        {% for link in links %}
+            <form class="py-3" method="post" action="{{ url_for('manage.link.edit_post', project_id=project_id, link_id=link.id) }}" id="{{ link.id }}">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="text-{{ link.id }}" name="text" placeholder="버튼 내용" maxlength="100" required value="{{ link.text }}">
+                    <label for="text-{{ link.id }}">버튼 내용</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="url" class="form-control" id="url-{{ link.id }}" name="url" placeholder="버튼 링크" maxlength="256" required value="{{ link.url }}">
+                    <label for="url-{{ link.id }}">URL</label>
+                </div>
+
+                <button class="btn {{ link.color }}" type="submit">버튼 수정</button>
+            </form>
+        {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}
