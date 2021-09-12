@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
+        <div class="py-3">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <a href="{{ member.html_url }}" target="_blank" rel="noreferrer"><img src="{{ member.avatar_url }}" class="rounded float-start" style="max-width:10%;margin-right:30px;"></a>
+                    <h5 class="card-title"><a href="{{ url_for('member.show', name=member.name) }}">{{ member.name }}</a></h5>
+                    <p class="card-text">{{ member.bio }}</p>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-dark" href="{{ member.html_url }}" target="_blank" rel="noreferrer">Github</a>
+                {% if member.blog|length > 0 %}
+                    <a class="btn btn-primary" href="{{ member.blog }}" target="_blank" rel="noreferrer">Website</a>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="py-3">
+        {% if member.auto_update %}
+            {% set update_true = "checked" %}
+        {% else %}
+            {% set update_false = "checked" %}
+        {% endif %}
+
+            <form method="post" action="{{ url_for('manage.me.update_post') }}">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="update" id="updateTrue" value="true" {{update_true}}>
+                    <label class="form-check-label" for="updateTrue">내 정보를 <b>GitHub</b>에서 가져옵니다.</label>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="radio" name="update" id="updateFalse" value="false" {{update_false}}>
+                    <label class="form-check-label" for="updateFalse">내 정보를 수동으로 설정합니다.</label>
+                </div>
+
+                <button class="btn btn-primary" type="submit">저장하기</button>
+                <a class="btn btn-dark" href="{{ url_for('manage.me.github') }}"><b>Github</b>에서 불러오기</a>
+            </form>
+        </div>
+
+    {% if not member.auto_update %}
+        <div class="py-3">
+            <form method="post" action="{{ url_for('manage.me.member_post') }}">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="blog" name="blog" placeholder="블로그 링크" maxlength="255" required value="{{ member.blog }}">
+                    <label for="blog">블로그 링크</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="bio" name="bio" placeholder="설명" required style="height:128px">{{ member.bio }}</textarea>
+                    <label for="bio">설명</label>
+                </div>
+
+                <button class="btn btn-primary" type="submit">저장하기</button>
+            </form>
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}

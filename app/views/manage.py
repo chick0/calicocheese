@@ -7,11 +7,13 @@ from flask import url_for
 from flask import render_template
 
 from app import db
+from app.models import Member
 from app.models import Project
 from app.utils import check_login
 from app.utils import get_user_from_session
 from .session import bp as session_bp
 from .files import bp as files_bp
+from .me import bp as me_bp
 
 
 bp = Blueprint(
@@ -21,6 +23,7 @@ bp = Blueprint(
 )
 bp.register_blueprint(session_bp)
 bp.register_blueprint(files_bp)
+bp.register_blueprint(me_bp)
 
 
 @bp.get("/me")
@@ -28,7 +31,16 @@ def me():
     if not check_login():
         return redirect(url_for("manage.session.login"))
 
-    return "manage.me"
+    user = get_user_from_session()
+
+    member = Member.query.filter_by(
+        id=user.id
+    ).first()
+
+    return render_template(
+        "manage/me.html",
+        member=member
+    )
 
 
 @bp.get("/write")
