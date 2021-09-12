@@ -62,3 +62,10 @@
         </div>
     </div>
 {% endblock %}
+{% block script %}
+
+{% if request.args.get("e") == "tml" %}
+    <script>alert("10개보다 더 많은 버튼을 만들 수 없습니다.")</script>
+{% endif %}
+
+{% endblock %}
