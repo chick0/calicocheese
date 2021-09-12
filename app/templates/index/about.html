@@ -10,14 +10,14 @@
         {% for member in members %}
             <div class="card mb-3">
                 <div class="card-body">
-                    <img src="{{ member.avatar_url }}" class="rounded float-start" style="max-width:10%;margin-right:30px;">
+                    <a href="{{ member.html_url }}" target="_blank" rel="noreferrer"><img src="{{ member.avatar_url }}" class="rounded float-start" style="max-width:10%;margin-right:30px;"></a>
                     <h5 class="card-title"><a href="{{ url_for('member.show', name=member.name) }}">{{ member.name }}</a></h5>
                     <p class="card-text">{{ member.bio }}</p>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-dark" href="{{ member.html_url }}">Github</a>
+                    <a class="btn btn-dark" href="{{ member.html_url }}" target="_blank" rel="noreferrer">Github</a>
                 {% if member.blog|length > 0 %}
-                    <a class="btn btn-primary" href="{{ member.blog }}">Website</a>
+                    <a class="btn btn-primary" href="{{ member.blog }}" target="_blank" rel="noreferrer">Website</a>
                 {% endif %}
                 </div>
             </div>
