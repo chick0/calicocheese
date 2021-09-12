@@ -7,17 +7,20 @@
         <div class="py-3">
             <h1 class="display-4">{{ title }}</h1>
         {% if is_owner or is_admin %}
-            <div>
+            <div class="mb-3">
                 <a class="btn btn-warning" href="{{ url_for('manage.edit', project_id=project_id) }}">수정</a>
                 <a class="btn btn-danger" href="{{ url_for('manage.delete', project_id=project_id) }}">삭제</a>
             </div>
         {% endif %}
+            <div id="link-button"></div>
         </div>
-
-        {{ html|safe }}
+        <hr class="my-5">
+        <div class="pb-5">{{ html|safe }}</div>
     </div>
 {% endblock %}
 {% block script %}
+    <script src="{{ url_for('static', filename='axios.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='button.js') }}"></script>
     <script src="{{ url_for('static', filename='highlight.min.js') }}"></script>
-    <script>hljs.highlightAll();</script>
+    <script>hljs.highlightAll(); btn_init({{ project_id }});</script>
 {% endblock %}
