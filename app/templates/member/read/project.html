@@ -13,9 +13,9 @@
                 <a class="btn btn-primary" href="{{ url_for('manage.link.view', project_id=project_id) }}">버튼 관리</a>
             </div>
         {% endif %}
-            <div id="link-button"></div>
+            <hr class="mb-1"><div id="link-button"></div>
         </div>
-        <hr class="my-5">
+
         <div class="pb-5">{{ html|safe }}</div>
     </div>
 {% endblock %}
