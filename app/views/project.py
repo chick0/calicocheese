@@ -31,9 +31,25 @@ def show_all():
         Project.id.desc()
     ).paginate(page)
 
+    pages = []
+
+    if projects.page < 3:
+        for i in range(1, projects.pages + 1):
+            if len(pages) == 5:
+                break
+
+            pages.append(i)
+    else:
+        for i in range(projects.page - 2, projects.pages + 1):
+            if len(pages) == 5:
+                break
+
+            pages.append(i)
+
     return render_template(
         "project/show_all.html",
-        projects=projects
+        projects=projects,
+        pages=pages
     )
 
 
