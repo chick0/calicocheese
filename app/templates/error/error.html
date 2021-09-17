@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
+        <div class="py-5">
+            <h1 class="display-5 fw-bold">{{ error.title }}</h1>
+            <p class="fs-4">{{ error.message }}</p>
+        </div>
+
+        <div class="pb-3">
+            <div class="d-grip">
+                <a class="btn btn-primary btn-lg" href="javascript:history.back();">뒤로 돌아가기</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

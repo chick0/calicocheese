@@ -53,4 +53,11 @@ def create_app():
     for filter_name in [x for x in dir(template_filter) if not x.startswith("__")]:
         app.add_template_filter(getattr(template_filter, filter_name), name=filter_name)
 
+    from .error_map import error_map
+    for code_or_exception in error_map.keys():
+        app.register_error_handler(
+            code_or_exception=code_or_exception,
+            f=error_map[code_or_exception]
+        )
+
     return app
