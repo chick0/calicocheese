@@ -1,5 +1,6 @@
 
 from flask import Blueprint
+from flask import g
 from flask import abort
 from flask import render_template
 
@@ -51,6 +52,9 @@ def project(name: str, project_id: int):
     if not pj.public:
         if user is None:
             raise PrivateProject
+
+    g.title = f"{name} 의 프로젝트"
+    g.description = pj.title
 
     return render_template(
         "member/read/project.html",

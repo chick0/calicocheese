@@ -2,11 +2,25 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Calico Cheese</title>
+        <title>{{ g.title }}</title>
         <meta name="author" content="chick_0">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+        <meta name="keywords" content="Calico Cheese, CalicoCheese, 칼리코치즈">
+        <meta name="description" content="{{ g.description }}">
+        <meta name="theme-color" content="#FFCC4D">
+        <meta property="og:type" content="website">
+        <meta property="og:locale" content="ko_KR">
+        <meta property="og:title" content="{{ g.title }}">
+        <meta property="og:description" content="{{ g.description }}">
+        <meta property="og:image" content="{{ url_for('static', filename='icon/192.png') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
         <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon/192.png') }}" sizes="192x192">
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon/256.png') }}" sizes="256x256">
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon/512.png') }}" sizes="512x512">
+        <link rel="apple-touch-icon" sizes="192x192" href="{{ url_for('static', filename='icon/192.png') }}">
+        <link rel="apple-touch-icon" sizes="256x256" href="{{ url_for('static', filename='icon/256.png') }}">
+        <link rel="apple-touch-icon" sizes="512x512" href="{{ url_for('static', filename='icon/512.png') }}">
         {% block head %}{% endblock %}
     </head>
     <body>

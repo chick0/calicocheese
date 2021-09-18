@@ -1,6 +1,7 @@
 from os import path
 from os import mkdir
 
+from flask import g
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
@@ -59,5 +60,10 @@ def create_app():
             code_or_exception=code_or_exception,
             f=error_map[code_or_exception]
         )
+
+    @app.before_request
+    def set_metadata():
+        g.title = "Calico Cheese"
+        g.description = "칼리코 치즈는 프로그램을 개발하는 팀 입니다."
 
     return app

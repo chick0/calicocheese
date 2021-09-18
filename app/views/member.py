@@ -1,5 +1,6 @@
 
 from flask import Blueprint
+from flask import g
 from flask import abort
 from flask import request
 from flask import render_template
@@ -54,6 +55,9 @@ def show(name: str):
                 break
 
             pages.append(i)
+
+    g.title = name
+    g.description = f"칼리코 치즈의 멤버 {name}(을)를 소개합니다."
 
     return render_template(
         "member/show.html",
