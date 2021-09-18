@@ -57,7 +57,7 @@ def show(name: str):
             pages.append(i)
 
     g.title = name
-    g.description = f"칼리코 치즈의 멤버 {name}(을)를 소개합니다."
+    g.description = member.bio
 
     return render_template(
         "member/show.html",
