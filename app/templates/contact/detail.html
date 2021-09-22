@@ -1,22 +1,19 @@
 {% extends 'layout.html' %}
-{% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='androidstudio.min.css') }}">
-{% endblock %}
 {% block content %}
     <div class="container">
         <div class="py-3">
             <h1 class="display-4">{{ contact.title }}</h1>
         {% if not session['guest'] %}
             <div class="mb-3">
-                <a class="btn btn-primary" href="">답변</a>
                 <a class="btn btn-danger" href="{{ url_for('contact.delete', contact_id=contact.id) }}">삭제</a>
             </div>
+        {% endif %}
 
             <table class="table">
                 <tbody>
                     <tr>
                         <th scope="row">유저 아이디</th>
-                        <td><a href="https://api.github.com/user/{{ contact.user_id }}" target="_blank" rel="noreferrer">JSON</a> {{ contact.user_id }}</td>
+                        <td>{% if not session['guest'] %}<a href="https://api.github.com/user/{{ contact.user_id }}" target="_blank" rel="noreferrer">JSON</a>{% endif %} {{ contact.user_id }}</td>
                     </tr>
                     <tr>
                         <th scope="row">이메일</th>
@@ -28,7 +25,6 @@
                     </tr>
                 </tbody>
             </table>
-        {% endif %}
         </div>
 
         <div class="pb-5">
@@ -37,10 +33,66 @@
         {% endfor %}
         </div>
 
+    {% if response is not none %}
         <div class="py-5">
-            <h2 class="display-5">답변</h2>
-            <p class="lead">멤버 : <a href="#">#</a></p>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th scope="row">멤버</th>
+                        <td><a href="{{ url_for('member.show', name=member.name) }}">{{ member.name }}</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">답변 등록날짜</th>
+                        <td>{{ response.date }}</td>
+                    </tr>
+                {% if not session['guest'] %}
+                    <tr>
+                        <th scope="row">답변 관리</th>
+                        <td>
+                            <a class="btn btn-primary" href="javascript:alert('개발중');">수정</a>
+                            <a class="btn btn-danger" href="{{ url_for('contact.response.delete', contact_id=contact.id) }}">삭제</a>
+                        </td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
 
+            <div class="pb-5">
+            {% for text in response.markdown.split("\n") %}
+                <p>{{ text }}</p>
+            {% endfor %}
+            </div>
         </div>
+    {% else %}
+        <form action="{{ url_for('contact.response.write_post', contact_id=contact.id) }}" method="post">
+            <div class="alert alert-danger">마크다운 문법은 적용되지 않습니다.</div>
+
+            <textarea id="editor" name="editor"></textarea>
+
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary btn-lg" type="submit">답변 등록</button>
+            </div>
+        </form>
+    {% endif %}
     </div>
 {% endblock %}
+
+{% if response is none %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='simplemde.min.css') }}">
+{% endblock %}
+{% block script %}
+    <script src="{{ url_for('static', filename='simplemde.min.js') }}"></script>
+    <script>
+        var simplemde = new SimpleMDE({
+            element: document.getElementById("editor"),
+            spellChecker: false,
+            tabSize: 4,
+	        toolbar: false,
+	        toolbarTips: false
+        });
+    </script>
+{% endblock %}
+
+{% endif %}

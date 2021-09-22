@@ -9,10 +9,12 @@ from flask import render_template
 from app import db
 from app.models import Member
 from app.models import Contact
+from app.models import Response
 from app.utils import check_login
 from app.utils import get_user_from_session
 from app.error import UserNotLogin
 from app.discord import send
+from .response import bp as _response
 
 
 bp = Blueprint(
@@ -20,6 +22,7 @@ bp = Blueprint(
     import_name="contact",
     url_prefix="/contact"
 )
+bp.register_blueprint(_response)
 
 
 @bp.get("")
@@ -66,7 +69,7 @@ def write_post():
     contact.user_id = user.id
     contact.email = user.email
     contact.title = request.form.get("title", "제목 없음")[:60]
-    contact.markdown = request.form.get("editor", "")[:20000]
+    contact.markdown = request.form.get("editor", "")[:5000]
 
     db.session.add(contact)
     db.session.commit()
@@ -100,9 +103,22 @@ def detail(contact_id: int):
         if not check_login():
             return abort(403)
 
+    response = Response.query.filter_by(
+        contact_id=contact.id
+    ).first()
+
+    if response is not None:
+        member = Member.query.filter_by(
+            id=response.user_id
+        ).first()
+    else:
+        member = None
+
     return render_template(
         "contact/detail.html",
-        contact=contact
+        contact=contact,
+        response=response,
+        member=member
     )
 
 
