@@ -215,6 +215,12 @@ class Contact(db.Model):
         nullable=False
     )
 
+    date = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=func.now()
+    )
+
     def __repr__(self):
         return f"<Contact id={self.id}, user_id={self.user_id}>"
 
