@@ -241,7 +241,6 @@ class Response(db.Model):
     contact_id = db.Column(
         db.Integer,
         unique=True,
-        primary_key=True,
         nullable=False
     )
 
