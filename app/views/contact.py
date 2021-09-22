@@ -7,10 +7,12 @@ from flask import url_for
 from flask import render_template
 
 from app import db
+from app.models import Member
 from app.models import Contact
 from app.utils import check_login
 from app.utils import get_user_from_session
 from app.error import UserNotLogin
+from app.discord import send
 
 
 bp = Blueprint(
@@ -69,6 +71,14 @@ def write_post():
     db.session.add(contact)
     db.session.commit()
 
+    send(
+        title=f"[문의등록] {contact.title}",
+        description=contact.markdown[:100],
+        url=request.host_url + url_for("contact.detail", contact_id=contact.id)[1:],
+        user_id=contact.user_id,
+        email=contact.email
+    )
+
     return redirect(url_for("contact.detail", contact_id=contact.id))
 
 
@@ -99,10 +109,21 @@ def detail(contact_id: int):
 @bp.get("/delete/<int:contact_id>")
 def delete(contact_id: int):
     if check_login():
-        Contact.query.filter_by(
+        contact = Contact.query.filter_by(
             id=contact_id
-        ).delete()
+        ).first()
 
+        db.session.delete(contact)
         db.session.commit()
+
+        user = get_user_from_session()
+        member = Member.query.filter_by(
+            id=user.id
+        ).first()
+
+        send(
+            title=f"[문의삭제] {contact.title}",
+            email=member.email,
+        )
 
     return redirect(url_for("contact.select"))
