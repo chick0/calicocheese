@@ -224,3 +224,37 @@ class Contact(db.Model):
     def __repr__(self):
         return f"<Contact id={self.id}, user_id={self.user_id}>"
 
+
+class Response(db.Model):
+    id = db.Column(
+        db.Integer,
+        unique=True,
+        primary_key=True,
+        nullable=False
+    )
+
+    user_id = db.Column(
+        db.Integer,
+        nullable=False
+    )
+
+    contact_id = db.Column(
+        db.Integer,
+        unique=True,
+        primary_key=True,
+        nullable=False
+    )
+
+    markdown = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    date = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=func.now()
+    )
+
+    def __repr__(self):
+        return f"<Response id={self.id}, contact_id={self.contact_id}>"
