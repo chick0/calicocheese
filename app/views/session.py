@@ -47,8 +47,15 @@ def callback():
     ).first()
 
     if member is None:
-        return "You are not member of Calico Cheese!"
+        session['guest'] = True
+        session['session'] = {
+            "access_token": dumps(access_token),
+            "user": dumps(user),
+        }
 
+        return redirect(url_for("contact.select"))
+
+    session['guest'] = False
     session['session'] = {
         "access_token": dumps(access_token),
         "user": dumps(user),
