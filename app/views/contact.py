@@ -27,20 +27,27 @@ def select():
     except UserNotLogin:
         return redirect(url_for("manage.session.login"))
 
+    if check_login():
+        contacts = Contact.query.order_by(
+            Contact.id.desc()
+        ).paginate(1)
+    else:
+        contacts = Contact.query.filter_by(
+            user_id=user.id
+        ).order_by(
+            Contact.id.desc()
+        ).paginate(1)
+
     return render_template(
         "contact/select.html",
         user=user,
-        email_is_none=user.email is None
+        email_is_none=user.email is None,
+        contacts=contacts
     )
 
 
 @bp.get("/write")
 def write():
-    try:
-        user = get_user_from_session()
-    except UserNotLogin:
-        return redirect(url_for("manage.session.login"))
-
     return render_template(
         "contact/write.html"
     )
@@ -76,6 +83,9 @@ def detail(contact_id: int):
         id=contact_id
     ).first()
 
+    if contact is None:
+        return abort(404)
+
     if contact.user_id != user.id:
         if not check_login():
             return abort(403)
@@ -84,3 +94,15 @@ def detail(contact_id: int):
         "contact/detail.html",
         contact=contact
     )
+
+
+@bp.get("/delete/<int:contact_id>")
+def delete(contact_id: int):
+    if check_login():
+        Contact.query.filter_by(
+            id=contact_id
+        ).delete()
+
+        db.session.commit()
+
+    return redirect(url_for("contact.select"))

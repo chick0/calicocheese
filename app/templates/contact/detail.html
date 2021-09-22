@@ -6,15 +6,24 @@
     <div class="container">
         <div class="py-3">
             <h1 class="display-4">{{ contact.title }}</h1>
-        {% if is_owner or is_admin %}
+        {% if not session['guest'] %}
             <div class="mb-3">
-                <a class="btn btn-warning" href="{{ url_for('manage.edit', project_id=project_id) }}">수정</a>
-                <a class="btn btn-danger" href="{{ url_for('manage.delete', project_id=project_id) }}">삭제</a>
-                <a class="btn btn-primary" href="{{ url_for('manage.link.view', project_id=project_id) }}">버튼 관리</a>
+                <a class="btn btn-primary" href="">답변</a>
+                <a class="btn btn-danger" href="{{ url_for('contact.delete', contact_id=contact.id) }}">삭제</a>
             </div>
         {% endif %}
         </div>
 
-        <div class="pb-5">{{ contact.markdown }}</div>
+        <div class="pb-5">
+        {% for text in contact.markdown.split("\n") %}
+            <p>{{ text }}</p>
+        {% endfor %}
+        </div>
+
+        <div class="py-5">
+            <h2 class="display-5">답변</h2>
+            <p class="lead">멤버 : <a href="#">#</a></p>
+
+        </div>
     </div>
 {% endblock %}
