@@ -11,6 +11,23 @@
                 <a class="btn btn-primary" href="">답변</a>
                 <a class="btn btn-danger" href="{{ url_for('contact.delete', contact_id=contact.id) }}">삭제</a>
             </div>
+
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th scope="row">유저 아이디</th>
+                        <td><a href="https://api.github.com/user/{{ contact.user_id }}" target="_blank" rel="noreferrer">JSON</a> {{ contact.user_id }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">이메일</th>
+                        <td>{{ contact.email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">등록날짜</th>
+                        <td>{{ contact.date }}</td>
+                    </tr>
+                </tbody>
+            </table>
         {% endif %}
         </div>
 
