@@ -22,8 +22,11 @@
         </div>
 
         <div class="py-5">
-
-
+            <div class="list-group list-group-flush">
+            {% for contact in contacts.items %}
+                <a class="list-group-item list-group-item-action" href="{{ url_for('contact.detail', contact_id=contact.id) }}">{{contact.title}}</a>
+            {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}
