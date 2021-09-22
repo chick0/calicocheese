@@ -1,12 +1,22 @@
 {% extends 'layout.html' %}
 {% block content %}
     <div class="container">
+        <div class="py-3">
+            <div class="alert alert-warning">
+                <p>특정 <b>프로젝트</b>에 대해 문의하는 경우에는 제목에 <b>프로젝트 이름</b>을 적어주세요</p>
+                <p>그래야 더 빠른 확인 및 답변이 가능합니다.</p>
+                <hr>
+                <p class="mb-0">예시) [프로젝트 제목] 문의 제목</p>
+            </div>
+            <div class="alert alert-danger">최대 <b>5000</b>자 까지 작성이 가능합니다.</div>
+        </div>
+
         <form method="post" class="py-3">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="title" name="title" placeholder="제목" maxlength="60" required>
                 <label for="title">제목</label>
             </div>
-            <textarea id="editor" name="editor"></textarea>
+            <textarea id="editor" name="editor" maxlength="5000"></textarea>
             <hr>
             <div class="d-grid gap-2">
                 <button class="btn btn-primary btn-lg" type="submit">문의 등록</button>
