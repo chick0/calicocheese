@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='androidstudio.min.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="py-3">
+            <h1 class="display-4">{{ contact.title }}</h1>
+        {% if is_owner or is_admin %}
+            <div class="mb-3">
+                <a class="btn btn-warning" href="{{ url_for('manage.edit', project_id=project_id) }}">수정</a>
+                <a class="btn btn-danger" href="{{ url_for('manage.delete', project_id=project_id) }}">삭제</a>
+                <a class="btn btn-primary" href="{{ url_for('manage.link.view', project_id=project_id) }}">버튼 관리</a>
+            </div>
+        {% endif %}
+        </div>
+
+        <div class="pb-5">{{ contact.markdown }}</div>
+    </div>
+{% endblock %}

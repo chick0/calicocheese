@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
+        <div class="py-3">
+            <h1 class="display-4">무엇을 도와드릴까요?</h1>
+        {% if email_is_none %}
+            <p class="lead">로그인 유저 : {{ user.name }}</p>
+
+            <div class="alert alert-danger">
+                <p class="mb-0">- <b>Github</b>에서 <b>이메일</b>을 전달받지 못했습니다.</p>
+                <p class="mb-0">- 귀하의 <b>이메일</b>로 답변 안내를 보낼 수 없습니다.</p>
+            </div>
+        {% else %}
+            <p class="lead">로그인 유저 : {{ user.email }}</p>
+        {% endif %}
+
+        {% if session['guest'] %}
+            <div class="d-grid gap-2">
+                <a class="btn btn-primary btn-lg" href="{{ url_for('contact.write') }}">질문 작성하기</a>
+            </div>
+        {% endif %}
+        </div>
+
+        <div class="py-5">
+
+
+        </div>
+    </div>
+{% endblock %}
