@@ -186,3 +186,35 @@ class Link(db.Model):
 
     def __repr__(self):
         return f"<Link id={self.id}, project_id={self.project_id}>"
+
+
+class Contact(db.Model):
+    id = db.Column(
+        db.Integer,
+        unique=True,
+        primary_key=True,
+        nullable=False
+    )
+
+    user_id = db.Column(
+        db.Integer,
+        nullable=False
+    )
+
+    email = db.Column(
+        db.String(255)
+    )
+
+    title = db.Column(
+        db.String(60),
+        nullable=False
+    )
+
+    markdown = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    def __repr__(self):
+        return f"<Contact id={self.id}, user_id={self.user_id}>"
+
