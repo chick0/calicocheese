@@ -2,9 +2,9 @@
 {% block content %}
     <div class="container">
         <div class="py-3">
-            <p class="lead">대상 프로젝트 : <a href="{{ url_for('project.warp', project_id=project_id) }}" target="_blank">{{ project_title }}</a></p>
+            <h1 class="display-6"><a href="{{ url_for('project.warp', project_id=project_id) }}">{{ project_title }}</a></h1>
 
-            <div class="alert alert-warning" role="alert">버튼 색상은 변경 할 수 없습니다.</div>
+            <div class="alert alert-warning" role="alert"><b>주의!</b> 버튼 색상은 변경 할 수 없습니다.</div>
             <form method="post" action="{{ url_for('manage.link.create_post', project_id=project_id) }}">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="text" name="text" placeholder="버튼 내용" maxlength="100" required>
@@ -56,6 +56,7 @@
                 </div>
 
                 <button class="btn {{ link.color }}" type="submit">버튼 수정</button>
+                <a class="btn btn-danger" href="{{ url_for('manage.link.delete', project_id=project_id, link_id=link.id) }}">버튼 삭제</a>
             </form>
         {% endfor %}
 
