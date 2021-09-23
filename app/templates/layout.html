@@ -64,10 +64,12 @@
                 <p class="col-md-4 mb-0 text-muted">&copy; Calico Cheese</p>
 
             {% if session['session'] %}
-                <a href="{{ url_for('manage.session.logout') }}" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                {% set img_a_url = url_for('manage.session.logout') %}
             {% else %}
-                <a href="{{ url_for('manage.session.login') }}" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                {% set img_a_url = url_for('manage.session.login') %}
             {% endif %}
+
+                <a href="{{ img_a_url }}" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                     <img class="bi me-2 rounded"  width="40" height="40" src="{{ url_for('static', filename='icon/192.png') }}">
                 </a>
 
