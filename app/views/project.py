@@ -1,5 +1,6 @@
 
 from flask import Blueprint
+from flask import g
 from flask import abort
 from flask import request
 from flask import redirect
@@ -45,6 +46,10 @@ def show_all():
                 break
 
             pages.append(i)
+
+    g.title = "프로젝트"
+    g.description = "칼리코 치즈의 멤버들이 진행한 프로젝트들 입니다."
+    g.canonical += url_for('project.show_all')
 
     return render_template(
         "project/show_all.html",

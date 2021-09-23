@@ -2,6 +2,7 @@
 from flask import Blueprint
 from flask import g
 from flask import abort
+from flask import url_for
 from flask import render_template
 
 from app.models import Member
@@ -56,9 +57,11 @@ def project(name: str, project_id: int, project_title: str = None):
 
     g.title = f"{name} 의 프로젝트"
     g.description = pj.title
+    g.canonical += url_for('member.read.project', name=name, project_id=project_id, project_title=pj.title)
 
     return render_template(
         "member/read/project.html",
+        name=name,
         title=pj.title,
         html=pj.html,
         project_id=pj.id,

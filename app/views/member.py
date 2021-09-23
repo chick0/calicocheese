@@ -3,6 +3,7 @@ from flask import Blueprint
 from flask import g
 from flask import abort
 from flask import request
+from flask import url_for
 from flask import render_template
 
 from app.models import Member
@@ -58,6 +59,7 @@ def show(name: str):
 
     g.title = name
     g.description = member.bio
+    g.canonical += url_for('member.show', name=name)
 
     return render_template(
         "member/show.html",
