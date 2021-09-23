@@ -129,6 +129,10 @@ def delete(file_id: int):
         owner=user.id
     ).delete()
 
+    CheckSum.query.filter_by(
+        id=file_id
+    ).delete()
+
     db.session.commit()
 
     return redirect(url_for("manage.files.show_all"))
