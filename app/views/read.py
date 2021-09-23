@@ -19,7 +19,8 @@ bp = Blueprint(
 
 
 @bp.get("/<string:name>/<int:project_id>")
-def project(name: str, project_id: int):
+@bp.get("/<string:name>/<int:project_id>/<string:project_title>")
+def project(name: str, project_id: int, project_title: str = None):
     member = Member.query.filter_by(
         name=name
     ).first()

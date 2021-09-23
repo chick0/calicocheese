@@ -69,4 +69,11 @@ def warp(project_id: int):
     if member is None:
         return abort(404)
 
-    return redirect(url_for("member.read.project", name=member.name, project_id=project_id))
+    return redirect(
+        url_for(
+            "member.read.project",
+            name=member.name,
+            project_id=project.id,
+            project_title=project.title
+        )
+    )

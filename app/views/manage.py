@@ -71,7 +71,7 @@ def write_post():
     db.session.add(project)
     db.session.commit()
 
-    return redirect(url_for("member.read.project", name=user.name, project_id=project.id))
+    return redirect(url_for("project.warp", project_id=project.id))
 
 
 @bp.get("/edit/<int:project_id>")
