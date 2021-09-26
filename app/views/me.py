@@ -81,17 +81,15 @@ def github():
         "user": dumps(user),
     }
 
-    if member.email != user.email:
-        member.email = user.email
-
-    if member.blog != user.blog:
-        member.blog = user.blog
-
-    if member.two_factor_authentication != user.two_factor_authentication:
-        member.two_factor_authentication = user.two_factor_authentication
-
-    if member.bio != user.bio:
-        member.bio = user.bio
+    for key in [
+        "email",
+        "blog",
+        "bio",
+        "two_factor_authentication",
+    ]:
+        value = getattr(user, key)
+        if value is not None:
+            setattr(member, key, value)
 
     db.session.commit()
 

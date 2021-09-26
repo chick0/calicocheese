@@ -62,18 +62,17 @@ def callback():
     }
 
     if member.auto_update:
-        if member.email != user.email:
-            member.email = user.email
+        for key in [
+            "email",
+            "blog",
+            "bio",
+        ]:
+            value = getattr(user, key)
+            if value is not None:
+                setattr(member, key, value)
 
-        if member.blog != user.blog:
-            member.blog = user.blog
+    member.two_factor_authentication = user.two_factor_authentication
 
-        if member.two_factor_authentication != user.two_factor_authentication:
-            member.two_factor_authentication = user.two_factor_authentication
-
-        if member.bio != user.bio:
-            member.bio = user.bio
-
-        db.session.commit()
+    db.session.commit()
 
     return redirect(url_for("manage.me"))
