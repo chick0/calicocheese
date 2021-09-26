@@ -39,9 +39,15 @@ def me():
         id=user.id
     ).first()
 
+    private_project = Project.query.filter_by(
+        owner=member.id,
+        public=False
+    ).count()
+
     return render_template(
         "manage/me.html",
-        member=member
+        member=member,
+        private_project=private_project
     )
 
 
