@@ -6,9 +6,11 @@ from flask import request
 from flask import redirect
 from flask import url_for
 from flask import render_template
+from sqlalchemy import or_
 
 from app.models import Member
 from app.models import Project
+from app.utils import check_login
 
 
 bp = Blueprint(
@@ -20,6 +22,12 @@ bp = Blueprint(
 
 @bp.get("")
 def show_all():
+    def get_filter():
+        if check_login():
+            return or_((Project.public == False) | (Project.public == True))
+        else:
+            return Project.public == True
+
     try:
         page = int(request.args.get("page", "1"))
 
@@ -28,7 +36,9 @@ def show_all():
     except ValueError:
         page = 1
 
-    projects = Project.query.order_by(
+    projects = Project.query.filter(
+        get_filter()
+    ).order_by(
         Project.id.desc()
     ).paginate(page)
 
