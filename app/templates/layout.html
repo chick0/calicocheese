@@ -47,11 +47,21 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('manage.files.show_all') }}">파일 관리</a>
                         </li>
-                    {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('manage.memo.show_all') }}">메모 관리</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('manage.memo.group.show_all') }}">메모 그룹</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('contact.select') }}">문의하기</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('manage.session.logout') }}">로그아웃</a>
                         </li>
                     {% endif %}
+                {% endif %}
                     </ul>
                 </div>
             </div>
