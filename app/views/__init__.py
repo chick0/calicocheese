@@ -7,7 +7,6 @@ __all__ = [
     "member",
     "project",
     "robots",
-    "upload",
 ]
 
 from . import *

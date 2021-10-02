@@ -11,6 +11,7 @@ from app.models import Member
 from app.models import Project
 from app.utils import check_login
 from app.utils import get_user_from_session
+from .upload import bp as upload_bp
 from .session import bp as session_bp
 from .files import bp as files_bp
 from .me import bp as me_bp
@@ -23,6 +24,7 @@ bp = Blueprint(
     import_name="manage",
     url_prefix="/manage"
 )
+bp.register_blueprint(upload_bp)
 bp.register_blueprint(session_bp)
 bp.register_blueprint(files_bp)
 bp.register_blueprint(me_bp)
