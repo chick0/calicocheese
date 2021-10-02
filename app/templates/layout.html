@@ -41,17 +41,21 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('manage.me') }}">대시보드</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('upload.form') }}">파일 업로드</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">파일 관리</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url_for('manage.upload.form') }}">파일 업로드</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('manage.files.show_all') }}">파일 관리</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('manage.files.show_all') }}">파일 관리</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('manage.memo.show_all') }}">메모 관리</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('manage.memo.group.show_all') }}">메모 그룹</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">메모 관리</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url_for('manage.memo.show_all') }}">메모 관리</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('manage.memo.group.show_all') }}">메모 그룹</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ url_for('manage.memo.write') }}">메모 작성하기</a></li>
+                            </ul>
                         </li>
                     {% else %}
                         <li class="nav-item">
