@@ -45,6 +45,9 @@ def project(name: str, project_id: int, project_title: str = None):
             id=user.id
         ).first()
 
+        if member_from_db is None:
+            raise UserNotLogin
+
         is_admin = member_from_db.is_admin
     except UserNotLogin:
         user = None
