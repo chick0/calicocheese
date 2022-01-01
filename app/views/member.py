@@ -1,4 +1,3 @@
-
 from flask import Blueprint
 from flask import g
 from flask import abort
@@ -9,7 +8,6 @@ from flask import render_template
 from app.models import Member
 from app.models import Project
 from .read import bp as read_bp
-
 
 bp = Blueprint(
     name="member",

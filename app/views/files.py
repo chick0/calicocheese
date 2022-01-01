@@ -19,7 +19,6 @@ from app.utils import get_user_from_session
 from app.error import FileIsEmpty
 from app.error import FileIsTooBig
 
-
 bp = Blueprint(
     name="files",
     import_name="files",

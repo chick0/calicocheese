@@ -1,10 +1,8 @@
-
 from flask import Blueprint
 from flask import request
 from flask import jsonify
 
 from app.models import Link
-
 
 bp = Blueprint(
     name="api",

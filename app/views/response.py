@@ -1,4 +1,3 @@
-
 from flask import Blueprint
 from flask import request
 from flask import redirect
@@ -11,7 +10,6 @@ from app.models import Response
 from app.utils import get_user_from_session
 from app.utils import check_login
 from app.discord import send
-
 
 bp = Blueprint(
     name="response",

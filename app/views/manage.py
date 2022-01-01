@@ -1,4 +1,3 @@
-
 from flask import Blueprint
 from flask import abort
 from flask import request
@@ -16,7 +15,6 @@ from .session import bp as session_bp
 from .files import bp as files_bp
 from .me import bp as me_bp
 from .link import bp as link_bp
-
 
 bp = Blueprint(
     name="manage",

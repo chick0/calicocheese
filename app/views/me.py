@@ -14,7 +14,6 @@ from app.utils import get_user_from_session
 from app.github import AccessToken
 from app.github import get_user
 
-
 bp = Blueprint(
     name="me",
     import_name="me",

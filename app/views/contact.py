@@ -1,4 +1,3 @@
-
 from flask import Blueprint
 from flask import abort
 from flask import request
@@ -15,7 +14,6 @@ from app.utils import get_user_from_session
 from app.error import UserNotLogin
 from app.discord import send
 from .response import bp as _response
-
 
 bp = Blueprint(
     name="contact",

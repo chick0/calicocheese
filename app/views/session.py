@@ -12,7 +12,6 @@ from app.github import build_url
 from app.github import generate_access_token
 from app.github import get_user
 
-
 bp = Blueprint(
     name="session",
     import_name="session",

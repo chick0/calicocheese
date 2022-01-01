@@ -1,4 +1,3 @@
-
 from flask import Blueprint
 from flask import abort
 from flask import request
@@ -11,7 +10,6 @@ from app.models import Project
 from app.models import Link
 from app.utils import check_login
 from app.utils import get_user_from_session
-
 
 bp = Blueprint(
     name="link",

@@ -1,4 +1,3 @@
-
 from flask import Blueprint
 from flask import g
 from flask import abort
@@ -10,7 +9,6 @@ from app.models import Project
 from app.utils import get_user_from_session
 from app.error import UserNotLogin
 from app.error import PrivateProject
-
 
 bp = Blueprint(
     name="read",

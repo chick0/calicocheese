@@ -10,7 +10,6 @@ from app import UPLOAD_DIR
 from app.models import File
 from app.models import CheckSum
 
-
 bp = Blueprint(
     name="file",
     import_name="file",

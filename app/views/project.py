@@ -1,4 +1,3 @@
-
 from flask import Blueprint
 from flask import g
 from flask import abort
@@ -11,7 +10,6 @@ from sqlalchemy import or_
 from app.models import Member
 from app.models import Project
 from app.utils import check_login
-
 
 bp = Blueprint(
     name="project",
