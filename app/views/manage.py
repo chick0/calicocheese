@@ -16,7 +16,6 @@ from .session import bp as session_bp
 from .files import bp as files_bp
 from .me import bp as me_bp
 from .link import bp as link_bp
-from .memo import bp as memo_bp
 
 
 bp = Blueprint(
@@ -29,7 +28,6 @@ bp.register_blueprint(session_bp)
 bp.register_blueprint(files_bp)
 bp.register_blueprint(me_bp)
 bp.register_blueprint(link_bp)
-bp.register_blueprint(memo_bp)
 
 
 @bp.get("/me")
